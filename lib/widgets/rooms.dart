@@ -68,7 +68,7 @@ class _CreateRoomButton extends StatelessWidget {
           Icon(
             Icons.video_call,
             size: 35.0,
-            color: Colors.white,
+            color: Colors.purple,
           ),
           const SizedBox(width: 4.0),
           Text('Create\nRoom')
