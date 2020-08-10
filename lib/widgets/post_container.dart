@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_responsive_ui/widgets/widgets.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../config/palette.dart';
 import '../models/models.dart';
@@ -139,7 +140,74 @@ class _PostStats extends StatelessWidget {
             ),
           ],
         ),
+        const Divider(),
+        Row(children: [
+          _PostButton(
+            icon: Icon(
+              MdiIcons.thumbUpOutline,
+              color: Colors.grey[600],
+              size: 20.0,
+            ),
+            label: 'Like',
+            onTap: () => print('like'),
+          ),
+          _PostButton(
+            icon: Icon(
+              MdiIcons.commentOutline,
+              color: Colors.grey[600],
+              size: 20.0,
+            ),
+            label: 'Comment',
+            onTap: () => print('comment'),
+          ),
+          _PostButton(
+            icon: Icon(
+              MdiIcons.shareOutline,
+              color: Colors.grey[600],
+              size: 25.0,
+            ),
+            label: 'Share',
+            onTap: () => print('share'),
+          ),
+        ]),
       ],
+    );
+  }
+}
+
+class _PostButton extends StatelessWidget {
+  final Icon icon;
+  final String label;
+  final Function onTap;
+
+  const _PostButton({
+    Key key,
+    @required this.icon,
+    @required this.label,
+    @required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Material(
+        color: Colors.white,
+        child: InkWell(
+          onTap: onTap,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
+            height: 25.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                icon,
+                const SizedBox(width: 4.0),
+                Text(label),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
