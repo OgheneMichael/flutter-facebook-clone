@@ -5,11 +5,13 @@ import '../config/palette.dart';
 class CustomTabBar extends StatelessWidget {
   final List<IconData> icons;
   final int selectedIndex;
+  final bool isBottomIndicator;
   final Function(int) onTap;
 
   const CustomTabBar({
     Key key,
     @required this.icons,
+    this.isBottomIndicator = false,
     @required this.selectedIndex,
     @required this.onTap,
   }) : super(key: key);
@@ -19,9 +21,13 @@ class CustomTabBar extends StatelessWidget {
     return TabBar(
       indicatorPadding: EdgeInsets.zero,
       indicator: BoxDecoration(
-        border: Border(
-          top: BorderSide(color: Palette.facebookBlue, width: 3.0),
-        ),
+        border: isBottomIndicator
+            ? Border(
+                bottom: BorderSide(color: Palette.facebookBlue, width: 3.0),
+              )
+            : Border(
+                top: BorderSide(color: Palette.facebookBlue, width: 3.0),
+              ),
       ),
       tabs: icons
           .asMap()
