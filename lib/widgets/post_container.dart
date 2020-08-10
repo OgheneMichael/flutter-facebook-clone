@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_responsive_ui/widgets/widgets.dart';
 
+import '../config/palette.dart';
 import '../models/models.dart';
 
 class PostContainer extends StatelessWidget {
@@ -36,7 +37,12 @@ class PostContainer extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: CachedNetworkImage(imageUrl: post.imageUrl),
                 )
-              : const SizedBox.shrink()
+              : const SizedBox.shrink(),
+          Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12.0,
+              ),
+              child: _PostStats(post: post))
         ],
       ),
     );
@@ -87,6 +93,52 @@ class _PostHeader extends StatelessWidget {
           icon: Icon(Icons.more_horiz),
           onPressed: () => print('more'),
         )
+      ],
+    );
+  }
+}
+
+class _PostStats extends StatelessWidget {
+  final Post post;
+
+  const _PostStats({Key key, @required this.post}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(4.0),
+              decoration: BoxDecoration(
+                color: Palette.facebookBlue,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.thumb_up,
+                color: Colors.white,
+                size: 10.0,
+              ),
+            ),
+            SizedBox(width: 4.0),
+            Expanded(
+              child: Text(
+                '${post.likes}',
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+            ),
+            Text(
+              '${post.comments} Comments',
+              style: TextStyle(color: Colors.grey[600]),
+            ),
+            SizedBox(width: 8.0),
+            Text(
+              '${post.shares} Shares',
+              style: TextStyle(color: Colors.grey[600]),
+            ),
+          ],
+        ),
       ],
     );
   }
