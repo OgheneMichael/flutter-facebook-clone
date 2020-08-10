@@ -117,7 +117,16 @@ class _HomeScreenDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Flexible(flex: 2, child: Container(color: Colors.orange)),
+        Flexible(
+          flex: 2,
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: MoreOptionsList(currentUser: currentUser),
+            ),
+          ),
+        ),
         const Spacer(),
         Container(
           width: 600.0,
