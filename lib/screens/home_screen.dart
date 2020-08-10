@@ -86,7 +86,34 @@ class _HomeScreenDesktop extends StatelessWidget {
       children: [
         Flexible(flex: 2, child: Container(color: Colors.orange)),
         const Spacer(),
-        Container(width: 600.0, color: Colors.red),
+        Container(
+          width: 600.0,
+          child: CustomScrollView(
+            slivers: [
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(0, 20.0, 0, 10.0),
+                sliver: SliverToBoxAdapter(
+                  child: Stories(currentUser: currentUser, stories: stories),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: CreatePostContainer(currentUser: currentUser),
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(0, 10.0, 0, 5.0),
+                sliver: SliverToBoxAdapter(
+                  child: Rooms(onlineUsers: onlineUsers),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final Post post = posts[index];
+                  return PostContainer(post: post);
+                }, childCount: posts.length),
+              )
+            ],
+          ),
+        ),
         const Spacer(),
         Flexible(flex: 2, child: Container(color: Colors.blue)),
       ],
